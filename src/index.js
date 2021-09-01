@@ -1,17 +1,34 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import Usuario from './components/Usuario';
+import Formulario from './components/Formulario';
+import Contador from './components/Contador';
+import './index.css'
+import Boton from './elementos/Boton';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const App = () => {  
+  const [sesion, setsesion] = useState(false)
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  return (
+  <div className="contenedor">
+    {sesion === true ? 
+    <div>
+      <Usuario />
+      <Contador />
+      <Boton largo marginTop onClick={()=> setsesion(false) }  >Cerrar Sesion</Boton>
+    </div>
+    :
+    <div>
+      <Formulario setsesion={setsesion} />
+    </div>
+    }
+  </div>
+  )
+}
+
+
+
+
+
+ReactDOM.render(<App />, document.getElementById('root'));
+
